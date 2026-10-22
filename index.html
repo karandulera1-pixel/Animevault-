@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090914">
+  <meta name="description" content="AnimeVault — discover anime, explore characters, and find your next adventure.">
+  <title>AnimeVault — Enter the Animeverse</title>
+
+  <!-- FAVICON PRESERVATION:
+       This file intentionally does not add or replace a favicon.
+       If your current index.html uses a custom favicon link (for example,
+       favicon.png or assets/favicon.ico), copy that SAME existing <link rel="icon"...>
+       line from your old file into this <head>. Do not rename or replace the favicon file. -->
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090914;
+      --panel: rgba(22, 20, 43, .78);
+      --text: #f7f4ff;
+      --muted: #aaa6c7;
+      --purple: #a78bfa;
+      --pink: #ff72c6;
+      --cyan: #67e8f9;
+      --border: rgba(196, 181, 253, .18);
+      --shadow: 0 18px 55px rgba(0, 0, 0, .3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      margin: 0;
+      max-width: 100%;
+      overflow-x: clip;
+      background:
+        radial-gradient(ellipse at 12% 10%, rgba(110, 60, 210, .15), transparent 38rem),
+        radial-gradient(ellipse at 90% 48%, rgba(236, 72, 153, .08), transparent 35rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px clamp(16px, 4vw, 56px);
+      background: rgba(9, 9, 20, .78);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: -.04em; font-size: 1.25rem; }
+    .brand-mark {
+      display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px;
+      color: #100b20; background: linear-gradient(135deg, var(--cyan), var(--purple), var(--pink));
+      box-shadow: 0 0 24px rgba(167, 139, 250, .3);
+    }
+    .brand span:last-child { background: linear-gradient(90deg, #fff, #c4b5fd 60%, #f9a8d4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .nav-links { display: flex; align-items: center; gap: clamp(12px, 2.5vw, 30px); color: var(--muted); font-size: .92rem; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: white; }
+    .header-cta, .primary-btn {
+      border: 0; border-radius: 999px; padding: 11px 17px; font-weight: 800; color: #110b20;
+      background: linear-gradient(100deg, var(--cyan), #c4b5fd 55%, #f9a8d4);
+      box-shadow: 0 8px 25px rgba(167, 139, 250, .18);
+    }
+    .hero {
+      min-height: min(760px, calc(100svh - 64px));
+      position: relative; isolation: isolate; overflow: hidden;
+      display: grid; align-items: center;
+      padding: clamp(54px, 9vw, 112px) clamp(18px, 7vw, 100px);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-backdrop, .hero-glow, .hero-grid { position: absolute; inset: -8%; z-index: -2; pointer-events: none; }
+    .hero-backdrop {
+      background:
+        radial-gradient(ellipse at 70% 35%, rgba(236, 72, 153, .24), transparent 26%),
+        radial-gradient(ellipse at 72% 58%, rgba(103, 232, 249, .15), transparent 34%),
+        radial-gradient(ellipse at 48% 75%, rgba(139, 92, 246, .24), transparent 42%),
+        linear-gradient(125deg, #0b0a19 5%, #17102e 50%, #0a1424 100%);
+      transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1.08);
+      will-change: transform;
+    }
+    .hero-glow {
+      z-index: -1; inset: 12% 4% auto auto; width: min(43vw, 500px); aspect-ratio: 1;
+      border-radius: 50%; filter: blur(2px);
+      background: conic-gradient(from 130deg, rgba(103,232,249,.04), rgba(167,139,250,.3), rgba(255,114,198,.25), rgba(103,232,249,.04));
+      mask-image: radial-gradient(circle, black 15%, transparent 70%);
+      transform: translate3d(0, var(--glow-y, 0px), 0);
+      will-change: transform;
+    }
+    .hero-grid {
+      z-index: -1; opacity: .2;
+      background-image: linear-gradient(rgba(196,181,253,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(196,181,253,.12) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+    .hero-content { max-width: 760px; position: relative; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border);
+      padding: 7px 12px; border-radius: 999px; color: #e9d5ff; background: rgba(24, 18, 49, .65);
+      font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+    h1 { margin: 22px 0 16px; max-width: 780px; font-size: clamp(2.8rem, 8vw, 6.4rem); line-height: .98; letter-spacing: -.075em; }
+    .gradient-text { background: linear-gradient(95deg, #fff 5%, #c4b5fd 42%, #f9a8d4 76%, #67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { max-width: 560px; color: #c3bfdc; font-size: clamp(1rem, 2vw, 1.15rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .secondary-btn { border: 1px solid var(--border); border-radius: 999px; padding: 11px 17px; font-weight: 750; color: white; background: rgba(255,255,255,.055); }
+    .secondary-btn:hover { background: rgba(255,255,255,.11); }
+    .hero-note { margin-top: 28px; color: #aaa6c7; font-size: .85rem; }
+    .floating-orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(.3px); }
+    .orb-one { width: 10px; height: 10px; top: 24%; right: 17%; background: var(--cyan); box-shadow: 0 0 22px var(--cyan); }
+    .orb-two { width: 7px; height: 7px; top: 65%; right: 30%; background: var(--pink); box-shadow: 0 0 18px var(--pink); }
+    .orb-three { width: 5px; height: 5px; top: 38%; right: 9%; background: #c4b5fd; box-shadow: 0 0 16px #c4b5fd; }
+    .section { padding: 72px clamp(16px, 5vw, 64px); max-width: 1500px; margin: auto; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 24px; }
+    .section-kicker { color: var(--pink); text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; font-weight: 900; }
+    h2 { font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: -.055em; line-height: 1.1; margin: 7px 0 0; }
+    .muted { color: var(--muted); }
+    .tools { display: flex; gap: 10px; width: min(100%, 600px); margin-bottom: 22px; }
+    .search-input {
+      min-width: 0; flex: 1; color: white; background: rgba(255,255,255,.055);
+      border: 1px solid var(--border); border-radius: 14px; padding: 13px 15px; outline: none;
+    }
+    .search-input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(167,139,250,.13); }
+    .anime-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; }
+    .anime-card {
+      min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 18px;
+      background: linear-gradient(155deg, rgba(34,28,61,.9), rgba(15,14,31,.95));
+      box-shadow: var(--shadow); transition: border-color .25s ease, box-shadow .25s ease;
+      content-visibility: auto; contain-intrinsic-size: 330px;
+    }
+    .anime-card:hover { border-color: rgba(196,181,253,.5); box-shadow: 0 16px 38px rgba(96,55,180,.18); }
+    .poster-wrap { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: linear-gradient(135deg, #27204a, #111827); }
+    .poster { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .5s ease; }
+    .anime-card:hover .poster { transform: scale(1.045); }
+    .score { position: absolute; top: 10px; left: 10px; padding: 5px 8px; border-radius: 999px; background: rgba(10,9,22,.82); border: 1px solid var(--border); font-size: .75rem; font-weight: 800; }
+    .card-info { padding: 13px; }
+    .card-title { margin: 0 0 6px; font-size: .96rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-meta { color: var(--muted); font-size: .78rem; }
+    .status { padding: 24px; border: 1px dashed var(--border); border-radius: 16px; color: var(--muted); }
+    .feature-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { padding: 23px; border: 1px solid var(--border); border-radius: 18px; background: var(--panel); }
+    .feature-icon { font-size: 1.6rem; }
+    .feature h3 { margin: 10px 0 6px; }
+    .feature p { color: var(--muted); margin: 0; font-size: .92rem; }
+    footer { padding: 28px 18px; text-align: center; color: var(--muted); border-top: 1px solid var(--border); font-size: .85rem; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .load-more { display: block; margin: 26px auto 0; }
+    @media (max-width: 1050px) { .anime-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    @media (max-width: 760px) {
+      .site-header { padding: 11px 14px; gap: 10px; }
+      .nav-links { gap: 12px; font-size: .82rem; }
+      .nav-links a:nth-child(2) { display: none; }
+      .header-cta { display: none; }
+      .hero { min-height: 76svh; padding: 70px 20px; }
+      .hero-glow { width: 75vw; inset: 15% -12% auto auto; }
+      .section { padding-top: 54px; padding-bottom: 54px; }
+      .anime-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .card-info { padding: 11px; }
+      .feature-strip { grid-template-columns: 1fr; }
+      .section-heading { align-items: start; flex-direction: column; }
+      .tools { width: 100%; }
+    }
+    @media (max-width: 360px) {
+      .brand { font-size: 1.05rem; }
+      .nav-links { gap: 9px; }
+      .hero { padding-left: 16px; padding-right: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .hero-backdrop, .hero-glow { transform: none !important; will-change: auto; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="AnimeVault home">
+      <span class="brand-mark" aria-hidden="true">✦</span><span>AnimeVault</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#discover">Discover</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="header-cta" href="#discover">Explore anime ↗</a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-backdrop" id="heroBackdrop"></div>
+      <div class="hero-glow" id="heroGlow"></div>
+      <div class="hero-grid"></div>
+      <span class="floating-orb orb-one" aria-hidden="true"></span>
+      <span class="floating-orb orb-two" aria-hidden="true"></span>
+      <span class="floating-orb orb-three" aria-hidden="true"></span>
+      <div class="hero-content">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> Your next adventure starts here</div>
+        <h1 id="hero-title">Enter the <span class="gradient-text">Animeverse.</span></h1>
+        <p class="hero-copy">Discover unforgettable worlds, legendary heroes, and your next all-time favourite. Your anime journey lives here.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#discover">Discover anime <span aria-hidden="true">↗</span></a>
+          <a class="secondary-btn" href="#features">Explore AnimeVault</a>
+        </div>
+        <p class="hero-note">✦ Scroll to explore — the world moves with you.</p>
+      </div>
+    </section>
+
+    <section class="section" id="discover">
+      <div class="section-heading reveal">
+        <div><div class="section-kicker">Find your next obsession</div><h2>Popular anime</h2></div>
+        <p class="muted">Fresh picks for your watchlist.</p>
+      </div>
+      <div class="tools reveal">
+        <input class="search-input" id="animeSearch" type="search" placeholder="Search anime titles…" aria-label="Search anime titles">
+      </div>
+      <div id="animeStatus" class="status" role="status" aria-live="polite">Loading popular anime…</div>
+      <div id="animeGrid" class="anime-grid" aria-label="Popular anime results"></div>
+      <button class="secondary-btn load-more" id="loadMore" type="button" hidden>Load more anime</button>
+    </section>
+
+    <section class="section" id="features">
+      <div class="section-heading reveal">
+        <div><div class="section-kicker">Built for anime fans</div><h2>A little more magic.</h2></div>
+      </div>
+      <div class="feature-strip">
+        <article class="feature reveal"><div class="feature-icon" aria-hidden="true">🌌</div><h3>Cinematic scrolling</h3><p>Layered backgrounds shift gently as you scroll, creating depth without getting in your way.</p></article>
+        <article class="feature reveal"><div class="feature-icon" aria-hidden="true">🔎</div><h3>Find a favourite</h3><p>Search popular anime titles and browse cover art in a responsive card grid.</p></article>
+        <article class="feature reveal"><div class="feature-icon" aria-hidden="true">📱</div><h3>Made for mobile</h3><p>A touch-friendly layout, lightweight effects, and reduced-motion support.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="feature reveal">
+        <div class="section-kicker">Welcome to AnimeVault</div>
+        <h2>Every story opens a new world.</h2>
+        <p class="muted">Explore series, meet memorable characters, and keep discovering something new.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>Made for anime fans, with ✦ by AnimeVault.</footer>
+
+  <script>
+    (() => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const backdrop = document.getElementById('heroBackdrop');
+      const glow = document.getElementById('heroGlow');
+      let scrollQueued = false;
+
+      // Small, transform-only parallax movement; disabled on reduced-motion devices.
+      function updateParallax() {
+        const y = window.scrollY || 0;
+        if (backdrop) backdrop.style.setProperty('--parallax-y', `${Math.min(y * 0.18, 120)}px`);
+        if (glow) glow.style.setProperty('--glow-y', `${Math.min(y * -0.10, 0)}px`);
+        scrollQueued = false;
+      }
+      if (!reduceMotion) {
+        window.addEventListener('scroll', () => {
+          if (!scrollQueued) {
+            window.requestAnimationFrame(updateParallax);
+            scrollQueued = true;
+          }
+        }, { passive: true });
+        updateParallax();
+      }
+
+      // Reveal sections only when they approach the viewport.
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !reduceMotion) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealItems.forEach(item => observer.observe(item));
+      } else {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+      }
+
+      const grid = document.getElementById('animeGrid');
+      const status = document.getElementById('animeStatus');
+      const search = document.getElementById('animeSearch');
+      const loadMore = document.getElementById('loadMore');
+      let allAnime = [];
+      let visibleCount = 10;
+      let filteredAnime = [];
+
+      function escapeText(value) {
+        return String(value ?? '').replace(/[&<>"']/g, char => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        })[char]);
+      }
+
+      function renderAnime() {
+        const query = search.value.trim().toLowerCase();
+        filteredAnime = allAnime.filter(anime =>
+          (anime.title || '').toLowerCase().includes(query) ||
+          (anime.title_english || '').toLowerCase().includes(query)
+        );
+        const shown = filteredAnime.slice(0, visibleCount);
+        grid.innerHTML = shown.map(anime => {
+          const title = escapeText(anime.title_english || anime.title || 'Anime title');
+          const image = anime.images?.webp?.large_image_url || anime.images?.jpg?.large_image_url || '';
+          const score = anime.score ? Number(anime.score).toFixed(1) : 'N/A';
+          const year = anime.year || anime.aired?.prop?.from?.year || 'Anime';
+          const episodes = anime.episodes ? `${anime.episodes} eps` : 'Series';
+          return `<a class="anime-card" href="${escapeText(anime.url || 'https://myanimelist.net/anime/')}" target="_blank" rel="noopener noreferrer" aria-label="View ${title} on MyAnimeList">
+            <div class="poster-wrap">
+              ${image ? `<img class="poster" src="${escapeText(image)}" alt="${title} poster" loading="lazy" decoding="async">` : ''}
+              <span class="score">★ ${score}</span>
+            </div>
+            <div class="card-info"><h3 class="card-title">${title}</h3><div class="card-meta">${escapeText(year)} · ${escapeText(episodes)}</div></div>
+          </a>`;
+        }).join('');
+        status.hidden = shown.length > 0;
+        status.textContent = query && shown.length === 0 ? 'No anime found for that title. Try another search.' : 'Anime results are not available right now. Please try again in a moment.';
+        loadMore.hidden = filteredAnime.length <= visibleCount;
+      }
+
+      search.addEventListener('input', () => {
+        visibleCount = 10;
+        renderAnime();
+      });
+      loadMore.addEventListener('click', () => {
+        visibleCount += 10;
+        renderAnime();
+      });
+
+      async function loadAnime() {
+        try {
+          const response = await fetch('https://api.jikan.moe/v4/top/anime?limit=25');
+          if (!response.ok) throw new Error('Anime service is temporarily unavailable.');
+          const result = await response.json();
+          allAnime = Array.isArray(result.data) ? result.data : [];
+          if (!allAnime.length) throw new Error('No anime results were returned.');
+          status.hidden = true;
+          renderAnime();
+        } catch (error) {
+          status.hidden = false;
+          status.textContent = 'Could not load anime right now. Check your connection and refresh the page.';
+          grid.innerHTML = '';
+          loadMore.hidden = true;
+        }
+      }
+      loadAnime();
+    })();
+  </script>
+</body>
+</html>
