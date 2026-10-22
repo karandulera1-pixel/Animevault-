@@ -347,6 +347,75 @@
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
       document.getElementById('year').textContent = new Date().getFullYear();
     })();
+/* AnimeVault: scroll-reveal, parallax, and card glow */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Reveal elements only when JavaScript is active */
+.js .scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 550ms ease,
+    transform 550ms ease;
+}
+
+.js .scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtle anime card glow */
+.anime-card {
+  position: relative;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.anime-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(167, 139, 250, 0.65);
+  box-shadow:
+    0 8px 28px rgba(167, 139, 250, 0.13),
+    0 0 16px rgba(101, 231, 255, 0.07);
+}
+
+/* Parallax layers: apply this class to decorative backgrounds only */
+.parallax-layer {
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Respect accessibility preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .scroll-reveal,
+  .js .scroll-reveal.is-visible,
+  .anime-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .parallax-layer {
+    transform: none !important;
+    will-change: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .anime-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+    }
   </script>
 </body>
 </html>
