@@ -212,3 +212,83 @@
   </script>
 </body>
 </html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b1b">
+  <meta name="description" content="Discover stunning anime wallpapers for your phone and desktop on AnimeVault.">
+  <title>AnimeVault — HD Anime Wallpapers</title>
+  <link rel="icon" type="image/png" href="assets/animevault-eren-favicon.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(12, 14, 34, .88);
+      --line: rgba(173, 120, 255, .23);
+      --text: #f7f5ff;
+      --muted: #b7b8d0;
+      --purple: #b66cff;
+      --purple2: #7f4dff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(ellipse at 12% 12%, rgba(115, 41, 184, .22), transparent 35rem),
+        radial-gradient(ellipse at 88% 35%, rgba(25, 70, 176, .20), transparent 34rem),
+        var(--bg);
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .45;
+      background-image: radial-gradient(#b88bff 1px, transparent 1.5px);
+      background-size: 137px 137px;
+      background-position: 20px 30px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+    }
+    a { color: inherit; }
+    .site-header {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+      border-bottom: 1px solid rgba(163, 127, 255, .12);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 800; font-size: 1.15rem; letter-spacing: -.03em; }
+    .brand img { width: 42px; height: 42px; object-fit: cover; border-radius: 13px; border: 1px solid rgba(184, 126, 255, .7); box-shadow: 0 0 22px rgba(153, 82, 255, .25); }
+    .brand span { background: linear-gradient(90deg, #d69aff, #9165ff); color: transparent; background-clip: text; -webkit-background-clip: text; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-link { text-decoration: none; color: #e4dcff; font-weight: 650; font-size: .93rem; padding: 10px 17px; border: 1px solid rgba(176, 128, 255, .38); border-radius: 999px; background: rgba(109, 69, 173, .13); }
+    .nav-link:hover { background: rgba(148, 89, 255, .23); }
+    main { position: relative; z-index: 1; }
+    .hero { width: min(1040px, calc(100% - 32px)); margin: 28px auto 70px; }
+    .hero-card {
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgba(13, 14, 34, .97), rgba(8, 12, 31, .94) 60%, rgba(24, 15, 54, .92));
+      box-shadow: 0 25px 90px rgba(0, 0, 0, .38), 0 0 50px rgba(113, 56, 214, .09);
+      padding: clamp(26px, 6vw, 62px);
+    }
+    .hero-card::after { content: ""; position: absolute; width: 360px; height: 360px; right: -140px; top: -150px; border-radius: 50%; background: rgba(90, 62, 255, .14); filter: blur(55px); pointer-events: none; }
+    .eyebrow { color: #c58aff; text-transform: uppercase; letter-spacing: .22em; font-weight: 850; font-size: .75rem; margin: 0 0 14px; }
+    h1 { font-size: clamp(2.55rem, 7vw, 4.7rem); line-height: .99; letter-spacing: -.065em; max-width: 650px; margin: 0; font-weight: 850; }
+    h1 span { display: block; background: linear-gradient(100deg, #e4c4ff, #a06cff 58%, #d5a5ff); color: transparent; background-clip: text; -webkit-background-clip: text; }
+    .intro { max-width: 590px; color: #c5c7db; font-size: clamp(1rem, 2vw, 1.13rem); line-height: 1.8; margin: 22px 0 24px; }
+    .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 22px; padding: 15px 20px; borde
+... 
