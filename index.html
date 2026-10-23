@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080b12" />
+  <meta name="description" content="Anime Vault — a dark, cinematic home for your wallpaper collection." />
+  <title>Anime Vault — Wallpaper Gallery</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b12;
+      --panel: #101622;
+      --panel-2: #151d2b;
+      --text: #f5f7fb;
+      --muted: #a4afc1;
+      --accent: #e72b45;
+      --border: rgba(255,255,255,.10);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background:
+        radial-gradient(ellipse at 50% -15%, rgba(112,130,169,.22), transparent 55%),
+        var(--bg);
+      color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header { padding: 28px clamp(18px, 5vw, 72px) 18px; }
+    .topline { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:900; letter-spacing:.09em; text-transform:uppercase; }
+    .brand img { width:44px; height:44px; object-fit:cover; border-radius:10px; border:1px solid var(--border); }
+    .brand span { color:var(--accent); }
+    .badge { color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:8px 12px; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; }
+    .hero { padding: clamp(28px, 6vw, 72px) clamp(18px, 5vw, 72px) 34px; max-width:1200px; }
+    .eyebrow { color:var(--accent); font-size:.78rem; font-weight:800; letter-spacing:.22em; text-transform:uppercase; }
+    h1 { font-size:clamp(2.7rem, 8vw, 6.3rem); line-height:.92; letter-spacing:-.065em; margin:16px 0 20px; max-width:850px; }
+    h1 em { color:var(--accent); font-style:normal; }
+    .intro { max-width:620px; color:var(--muted); line-height:1.7; font-size:1.04rem; }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
+    button, .upload-label { border:0; cursor:pointer; border-radius:10px; padding:13px 18px; font:inherit; font-weight:800; transition:transform .15s, background .15s; }
+    button:hover, .upload-label:hover { transform:translateY(-2px); }
+    .primary { color:white; background:var(--accent); box-shadow:0 8px 26px rgba(231,43,69,.2); }
+    .secondary { color:var(--text); background:var(--panel-2); border:1px solid var(--border); }
+    #fileInput { display:none; }
+    .gallery-wrap { padding: 12px clamp(18px, 5vw, 72px) 70px; }
+    .gallery-heading { display:flex; justify-content:space-between; align-items:end; gap:16px; margin:12px 0 22px; flex-wrap:wrap; }
+    h2 { font-size:1.4rem; margin:0 0 6px; letter-spacing:-.03em; }
+    .subtext, #count { color:var(--muted); font-size:.9rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 245px), 1fr)); gap:18px; }
+    .card { background:var(--panel); border:1px solid var(--border); border-radius:15px; overflow:hidden; min-width:0; }
+    .preview { position:relative; aspect-ratio: 4 / 3; background:#0d111a; overflow:hidden; }
+    .preview img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s; }
+    .card:hover .preview img { transform:scale(1.045); }
+    .card-body { padding:12px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .filename { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.88rem; font-weight:700; }
+    .card-actions { display:flex; gap:6px; flex-shrink:0; }
+    .icon-btn { padding:7px 9px; background:var(--panel-2); border:1px solid var(--border); border-radius:7px; color:var(--text); font-size:.78rem; }
+    .empty { border:1px dashed rgba(255,255,255,.2); border-radius:16px; padding:52px 20px; text-align:center; color:var(--muted); }
+    .empty strong { display:block; color:var(--text); font-size:1.15rem; margin-bottom:8px; }
+    footer { border-top:1px solid var(--border); padding:22px clamp(18px, 5vw, 72px); color:var(--muted); font-size:.82rem; }
+    .lightbox { position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center; padding:24px; z-index:10; }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width:95vw; max-height:88vh; object-fit:contain; }
+    .close-lightbox { position:absolute; top:18px; right:20px; background:#202938; color:white; font-size:1.3rem; }
+    @media (max-width:600px) { header { padding-top:18px; } .badge { display:none; } .grid { gap:12px; } .hero { padding-top:36px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topline">
+      <div class="brand"><img src="favicon.png" alt="Anime Vault icon" /><div>Anime <span>Vault</span></div></div>
+      <div class="badge">Your personal wallpaper collection</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Collect your worlds</div>
+      <h1>YOUR WALLPAPERS.<br><em>YOUR VAULT.</em></h1>
+      <p class="intro">Build your own anime wallpaper gallery. Add images from your device, preview them in a cinematic grid, and download any wallpaper whenever you want.</p>
+      <div class="actions">
+        <label class="upload-label primary" for="fileInput">＋ Upload wallpapers</label>
+        <input id="fileInput" type="file" accept="image/*" multiple />
+        <button class="secondary" id="clearBtn" type="button">Clear gallery</button>
+      </div>
+    </section>
+
+    <section class="gallery-wrap">
+      <div class="gallery-heading">
+        <div><h2>Wallpaper gallery</h2><div class="subtext">Choose images to add them to this browser's gallery.</div></div>
+        <div id="count">0 wallpapers</div>
+      </div>
+      <div id="gallery" class="grid"></div>
+      <div id="empty" class="empty"><strong>Your vault is waiting.</strong>Upload your first wallpaper to get started.</div>
+    </section>
+  </main>
+
+  <footer>ANIME VAULT <span style="color:var(--accent)">/</span> Made for your collection.</footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Wallpaper preview">
+    <button class="close-lightbox" id="closeLightbox" type="button" aria-label="Close preview">×</button>
+    <img id="lightboxImg" alt="Wallpaper preview" />
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const gallery = document.getElementById('gallery');
+    const empty = document.getElementById('empty');
+    const count = document.getElementById('count');
+    const clearBtn = document.getElementById('clearBtn');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    let wallpapers = [];
+
+    function render() {
+      gallery.innerHTML = '';
+      empty.style.display = wallpapers.length ? 'none' : 'block';
+      count.textContent = `${wallpapers.length} wallpaper${wallpapers.length === 1 ? '' : 's'}`;
+      wallpapers.forEach((wallpaper, index) => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        const preview = document.createElement('div');
+        preview.className = 'preview';
+        const img = document.createElement('img');
+        img.src = wallpaper.url;
+        img.alt = wallpaper.name;
+        img.loading = 'lazy';
+        img.tabIndex = 0;
+        img.addEventListener('click', () => openPreview(wallpaper.url));
+        img.addEventListener('keydown', event => { if (event.key === 'Enter') openPreview(wallpaper.url); });
+        preview.appendChild(img);
+
+        const body = document.createElement('div');
+        body.className = 'card-body';
+        const name = document.createElement('div');
+        name.className = 'filename';
+        name.title = wallpaper.name;
+        name.textContent = wallpaper.name;
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+        const download = document.createElement('a');
+        download.className = 'icon-btn';
+        download.textContent = 'Download';
+        download.href = wallpaper.url;
+        download.download = wallpaper.name;
+        download.style.textDecoration = 'none';
+        const remove = document.createElement('button');
+        remove.className = 'icon-btn';
+        remove.type = 'button';
+        remove.textContent = '✕';
+        remove.setAttribute('aria-label', `Remove ${wallpaper.name}`);
+        remove.addEventListener('click', () => {
+          URL.revokeObjectURL(wallpapers[index].url);
+          wallpapers.splice(index, 1);
+          render();
+        });
+        actions.append(download, remove);
+        body.append(name, actions);
+        card.append(preview, body);
+        gallery.appendChild(card);
+      });
+    }
+
+    function openPreview(url) {
+      lightboxImg.src = url;
+      lightbox.classList.add('open');
+    }
+    function closePreview() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+    fileInput.addEventListener('change', event => {
+      const files = Array.from(event.target.files || []).filter(file => file.type.startsWith('image/'));
+      files.forEach(file => wallpapers.push({ name: file.name, url: URL.createObjectURL(file) }));
+      render();
+      fileInput.value = '';
+    });
+    clearBtn.addEventListener('click', () => {
+      if (!wallpapers.length || confirm('Remove all wallpapers from this gallery?')) {
+        wallpapers.forEach(item => URL.revokeObjectURL(item.url));
+        wallpapers = [];
+        render();
+      }
+    });
+    document.getElementById('closeLightbox').addEventListener('click', closePreview);
+    lightbox.addEventListener('click', event => { if (event.target === lightbox) closePreview(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closePreview(); });
+    render();
+  </script>
+</body>
+</html>
