@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b1b">
+  <meta name="description" content="Discover stunning anime wallpapers for your phone and desktop on AnimeVault.">
+  <title>AnimeVault — HD Anime Wallpapers</title>
+  <link rel="icon" type="image/png" href="assets/animevault-eren-favicon.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(12, 14, 34, .88);
+      --line: rgba(173, 120, 255, .23);
+      --text: #f7f5ff;
+      --muted: #b7b8d0;
+      --purple: #b66cff;
+      --purple2: #7f4dff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(ellipse at 12% 12%, rgba(115, 41, 184, .22), transparent 35rem),
+        radial-gradient(ellipse at 88% 35%, rgba(25, 70, 176, .20), transparent 34rem),
+        var(--bg);
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .45;
+      background-image: radial-gradient(#b88bff 1px, transparent 1.5px);
+      background-size: 137px 137px;
+      background-position: 20px 30px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+    }
+    a { color: inherit; }
+    .site-header {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+      border-bottom: 1px solid rgba(163, 127, 255, .12);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 800; font-size: 1.15rem; letter-spacing: -.03em; }
+    .brand img { width: 42px; height: 42px; object-fit: cover; border-radius: 13px; border: 1px solid rgba(184, 126, 255, .7); box-shadow: 0 0 22px rgba(153, 82, 255, .25); }
+    .brand span { background: linear-gradient(90deg, #d69aff, #9165ff); color: transparent; background-clip: text; -webkit-background-clip: text; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-link { text-decoration: none; color: #e4dcff; font-weight: 650; font-size: .93rem; padding: 10px 17px; border: 1px solid rgba(176, 128, 255, .38); border-radius: 999px; background: rgba(109, 69, 173, .13); }
+    .nav-link:hover { background: rgba(148, 89, 255, .23); }
+    main { position: relative; z-index: 1; }
+    .hero { width: min(1040px, calc(100% - 32px)); margin: 28px auto 70px; }
+    .hero-card {
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgba(13, 14, 34, .97), rgba(8, 12, 31, .94) 60%, rgba(24, 15, 54, .92));
+      box-shadow: 0 25px 90px rgba(0, 0, 0, .38), 0 0 50px rgba(113, 56, 214, .09);
+      padding: clamp(26px, 6vw, 62px);
+    }
+    .hero-card::after { content: ""; position: absolute; width: 360px; height: 360px; right: -140px; top: -150px; border-radius: 50%; background: rgba(90, 62, 255, .14); filter: blur(55px); pointer-events: none; }
+    .eyebrow { color: #c58aff; text-transform: uppercase; letter-spacing: .22em; font-weight: 850; font-size: .75rem; margin: 0 0 14px; }
+    h1 { font-size: clamp(2.55rem, 7vw, 4.7rem); line-height: .99; letter-spacing: -.065em; max-width: 650px; margin: 0; font-weight: 850; }
+    h1 span { display: block; background: linear-gradient(100deg, #e4c4ff, #a06cff 58%, #d5a5ff); color: transparent; background-clip: text; -webkit-background-clip: text; }
+    .intro { max-width: 590px; color: #c5c7db; font-size: clamp(1rem, 2vw, 1.13rem); line-height: 1.8; margin: 22px 0 24px; }
+    .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 22px; padding: 15px 20px; border-radius: 15px; background: linear-gradient(110deg, #c17aff, #874cff); color: white; font-weight: 800; text-decoration: none; box-shadow: 0 10px 28px rgba(137, 72, 255, .25); transition: transform .18s ease, filter .18s ease; }
+    .primary-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    .hero-art { display: flex; align-items: center; justify-content: center; margin: 35px auto 0; max-width: 780px; min-height: 230px; perspective: 1000px; }
+    .poster { width: 30%; aspect-ratio: .61; object-fit: cover; border-radius: 17px; border: 1px solid rgba(206, 178, 255, .3); box-shadow: 0 18px 38px rgba(0, 0, 0, .5); background: #15152b; }
+    .poster.left { transform: rotate(-8deg) translateX(18px) translateY(12px); z-index: 1; }
+    .poster.center { width: 34%; transform: translateY(-5px); z-index: 3; }
+    .poster.right { transform: rotate(8deg) translateX(-18px) translateY(12px); z-index: 2; }
+    .section { width: min(1120px, calc(100% - 32px)); margin: 0 auto 76px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 18px; margin-bottom: 22px; }
+    .section-heading h2 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.35rem); letter-spacing: -.04em; }
+    .section-heading p { margin: 8px 0 0; color: var(--muted); }
+    .count { color: #d9bdff; border: 1px solid var(--line); background: rgba(107, 67, 171, .14); border-radius: 999px; padding: 8px 12px; white-space: nowrap; font-size: .85rem; }
+    .wallpaper-grid { display: grid; grid-template-columns: repeat( auto-fit, minmax(190px, 1fr)); gap: 18px; }
+    .wallpaper-card { overflow: hidden; border: 1px solid rgba(172, 130, 255, .2); background: rgba(12, 14, 32, .8); border-radius: 20px; transition: transform .2s ease, border-color .2s ease; }
+    .wallpaper-card:hover { transform: translateY(-5px); border-color: rgba(190, 139, 255, .65); }
+    .wallpaper-card img { display: block; width: 100%; aspect-ratio: .78; object-fit: cover; background: #14162a; }
+    .card-info { padding: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .card-info h3 { margin: 0; font-size: .96rem; text-transform: capitalize; overflow-wrap: anywhere; }
+    .download { text-decoration: none; color: #e8d8ff; font-size: .83rem; font-weight: 750; padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(174, 126, 255, .3); background: rgba(133, 79, 220, .16); }
+    .download:hover { background: rgba(133, 79, 220, .32); }
+    .site-footer { position: relative; z-index: 1; border-top: 1px solid rgba(163, 127, 255, .15); padding: 26px 16px 34px; color: #aeb0c8; text-align: center; font-size: .9rem; }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 17px; margin-bottom: 12px; }
+    .footer-links a { text-decoration: none; color: #d5c5f7; }
+    .footer-links a:hover { color: white; }
+    .notice { display: none; margin: 16px 0 0; color: #ffd7a8; font-size: .9rem; }
+    @media (min-width: 760px) {
+      .hero { margin-top: 38px; }
+      .hero-card { min-height: 590px; }
+      .hero-art { margin-top: -145px; margin-right: 0; margin-left: auto; width: 52%; }
+      .hero-card .hero-copy { position: relative; z-index: 4; max-width: 58%; }
+    }
+    @media (max-width: 520px) {
+      .site-header { width: calc(100% - 24px); padding: 16px 0; }
+      .brand { font-size: 1rem; }
+      .brand img { width: 36px; height: 36px; }
+      .nav-link { padding: 9px 13px; font-size: .86rem; }
+      .hero, .section { width: calc(100% - 24px); }
+      .hero { margin-top: 18px; margin-bottom: 54px; }
+      .hero-card { border-radius: 24px; padding: 28px 21px 24px; }
+      .hero-art { min-height: 195px; margin-top: 28px; }
+      .poster { border-radius: 12px; }
+      .section { margin-bottom: 55px; }
+      .wallpaper-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .wallpaper-card { border-radius: 15px; }
+      .card-info { align-items: flex-start; flex-direction: column; padding: 11px; }
+      .download { width: 100%; text-align: center; }
+      .section-heading { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="AnimeVault home">
+      <img src="assets/animevault-eren-favicon.png" alt="">
+      <span>AnimeVault</span>
+    </a>
+    <nav class="header-actions" aria-label="Main navigation">
+      <a class="nav-link" href="https://github.com/karandulera1-pixel/Animevault-" target="_blank" rel="noopener noreferrer">Admin ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-card">
+        <div class="hero-copy">
+          <p class="eyebrow">HD Anime Wallpapers</p>
+          <h1 id="hero-title">Your Anime <span>Wallpaper Collection</span></h1>
+          <p class="intro">Discover stunning anime wallpapers for your phone and desktop. Explore your favorite characters, find new artwork, and make your screen come to life.</p>
+          <a class="primary-button" href="#wallpapers">Explore wallpapers <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-art" aria-label="Featured anime wallpapers">
+          <img class="poster left" src="assets/floating/eren-black-white.jpg" alt="Eren black and white wallpaper" onerror="this.style.visibility='hidden'">
+          <img class="poster center" src="assets/floating/luffy-gear-5.jpg" alt="Luffy Gear 5 wallpaper" onerror="this.style.visibility='hidden'">
+          <img class="poster right" src="assets/floating/berserk-crimson.jpg" alt="Berserk crimson wallpaper" onerror="this.style.visibility='hidden'">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="wallpapers" aria-labelledby="wallpapers-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Find your next background</p>
+          <h2 id="wallpapers-title">Featured Wallpapers</h2>
+          <p>Pick a favorite and save it to your device.</p>
+        </div>
+        <span class="count" id="wallpaper-count">5 wallpapers</span>
+      </div>
+      <div class="wallpaper-grid" id="wallpaper-grid">
+        <article class="wallpaper-card">
+          <img src="assets/floating/eren-black-white.jpg" alt="Eren black and white anime wallpaper" loading="lazy">
+          <div class="card-info"><h3>Eren — Black &amp; White</h3><a class="download" href="assets/floating/eren-black-white.jpg" download>Download ↓</a></div>
+        </article>
+        <article class="wallpaper-card">
+          <img src="assets/floating/luffy-gear-5.jpg" alt="Luffy Gear 5 anime wallpaper" loading="lazy">
+          <div class="card-info"><h3>Luffy — Gear 5</h3><a class="download" href="assets/floating/luffy-gear-5.jpg" download>Download ↓</a></div>
+        </article>
+        <article class="wallpaper-card">
+          <img src="assets/floating/alucard-gothic-red.jpg" alt="Alucard gothic red anime wallpaper" loading="lazy">
+          <div class="card-info"><h3>Alucard — Gothic Red</h3><a class="download" href="assets/floating/alucard-gothic-red.jpg" download>Download ↓</a></div>
+        </article>
+        <article class="wallpaper-card">
+          <img src="assets/floating/berserk-crimson.jpg" alt="Berserk crimson anime wallpaper" loading="lazy">
+          <div class="card-info"><h3>Berserk — Crimson</h3><a class="download" href="assets/floating/berserk-crimson.jpg" download>Download ↓</a></div>
+        </article>
+        <article class="wallpaper-card">
+          <img src="assets/floating/uryu-electric-blue.png" alt="Uryu electric blue anime wallpaper" loading="lazy">
+          <div class="card-info"><h3>Uryu — Electric Blue</h3><a class="download" href="assets/floating/uryu-electric-blue.png" download>Download ↓</a></div>
+        </article>
+      </div>
+      <p class="notice" id="image-notice">Some wallpaper images could not be loaded. Check that the filenames in assets/floating match the filenames in this page.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="copyright.html">Copyright</a>
+    </nav>
+    <div>© <span id="year"></span> AnimeVault. All rights reserved.</div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const wallpaperImages = [...document.querySelectorAll("#wallpaper-grid img")];
+    let failedImages = 0;
+    wallpaperImages.forEach((img) => {
+      img.addEventListener("error", () => {
+        failedImages++;
+        if (failedImages > 0) document.getElementById("image-notice").style.display = "block";
+      }, { once: true });
+    });
+  </script>
+</body>
+</html>
